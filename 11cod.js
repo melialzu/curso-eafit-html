@@ -551,31 +551,403 @@ const tabla = {
      
 }
 document.write ("El mensaje en lenguaje Leet es: " , mensajeLeet)
- */
+ 
 
-// *** Ejercicio 23
+// *** Ejercicio 23 PREGUNTAR!!!!!
 
 let secuencia,P1,P2, punto
+const puntajes = {0: "Love", 15:15, 30:30, 40:40}
+
  secuencia = prompt ("Introduce la secuencia de ganadores de puntos (P1 o P2) separados por ,:").toUpperCase().split(",")
 
  console.log (secuencia)
 
 P1 = 0
 P2 = 0
+console.log(P1)
+console.log(P2)
+
 
 for (let i = 0; i < secuencia.length; i++){
     punto = secuencia[i]
-    //console.log (punto)
+   
 
-if (punto === "P1") {
-    P1++
-    //console.log(P1)
+    if (punto === "P1") {
+        if (P1 === 30){
+            if (P2 === 40){
+                P1 = "Deuce"
+                P2 = "Deuce"
+            } else {
+                P1 = 40
+            }
+             
 
-}else if (punto === "P2") {
-    P2++
+        }else if (P1 === 40){
+            if (P2 === 40){
+                P1 = "Deuce"
+                P2 = "Deuce"
+            } else {
+             P1 = "Ventaja P1"
+             P2=40
+            
+            }
+        }else if (P1 === "Ventaja P1"){
+            console.log ("Ha ganado el P1")
+        break}
+        else{
+            P1 +=15
+        }
+     
+        
+            
+   }else if (punto === "P2") {
+        if (P2 === 30){
+            if (P1 === 40){
+                P1 = "Deuce"
+                P2 = "Deuce"
+            } else {
+                P2 = 40
+            }
+            
+       
+        }else if (P2 === 40){
+            if (P1 === 40 ){
+                P1 = "Deuce"
+                P2 = "Deuce"                
+            }else {
+                P2 = "Ventaja P2"
+                P1 = 40
+            }
+        }else if (P2 === "Ventaja P2"){
+            console.log ("Ha ganado el P2")    
+        break
+
+        }else {                      
+            P2 +=15
+        }
+    }
+
+
+    if (P1 === "Deuce"  && P2 === "Deuce"){
+         console.log ("Deuce")
+
+    }else if (P1 === "Ventaja P1"  && P2 === "Ventaja P2"){
+        console.log ("Deuce")
+
+    }else if (P1 === "Ventaja P1"){
+        console.log("Ventaja P1")  
+
+    }else if (P2 === "Ventaja P2") {
+        console.log("Ventaja P2") 
+
+    }else {
+        console.log (`${puntajes[P1]}-${puntajes[P2]}`)
     
-}
-}
+
+    }    
 
 
-// *** Ejercicio 24
+   }
+      
+   //console.log(P1,P2)
+
+
+   if (P1 === "Ventaja P1" ){
+    console.log("Ha ganado el P1")
+   }else if (P1 > P2) { 
+    console.log("Ha ganado el P1")
+   }else if (P2 === "Ventaja P2"){
+    console.log("Ha ganado el P2")   
+   }else if (P2 > P1){
+    console.log("Ha ganado el P2")  
+   }else {
+    console.log("El juego terminó en empate")
+   }
+   
+
+
+// **** Ejercicio 24
+let caracteres,indice1, indice2,contraseña
+const longitud = 8
+const incluirMayusculas = true
+const incluirNumeros = true
+const incluirSimbolos = true
+
+const caracteresMayusculas = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+const caracteresMinusculas = 'abcdefghijklmnopqrstuvwxyz'
+const numeros = '0123456789'
+const simbolos = '!@#$%^&*()_-+=<>?/[]{},.:;'
+
+caracteres = caracteresMinusculas
+contraseña = ""
+
+
+function generarNumeroAleatorio(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+
+
+if (incluirMayusculas) {
+    caracteres += caracteresMayusculas
+}
+if (incluirNumeros) {
+    caracteres += numeros
+}
+
+if (incluirSimbolos) {
+    caracteres += simbolos  
+}
+  
+
+
+  for (let i = 0; i < longitud; i++) {
+    const indiceAleatorio = generarNumeroAleatorio(0, caracteres.length -1);
+    contraseña += caracteres.charAt(indiceAleatorio);
+  
+  }
+document.write ("Su contraseña es: " + contraseña)
+
+
+
+// ** Ejercicio 25
+
+
+let numero, resultado
+
+function esPrimo(numero) {
+    if (numero <= 1) {
+      return false;
+    }
+  
+    for (let i = 2; i <= Math.sqrt(numero); i++) {
+      if (numero % i === 0) {
+        return false;
+      }
+    }
+  
+    return true;
+  }
+  
+ 
+  function esFibonacci(numero) {
+    if (numero === 0 || numero === 1) {
+      return true;
+    }
+  
+    let a = 0;
+    let b = 1;
+    let c = a + b;
+  
+    while (c <= numero) {
+      if (c === numero) {
+        return true;
+      }
+  
+      a = b;
+      b = c;
+      c = a + b;
+    }
+  
+    return false;
+  }
+  
+ 
+  function esPar(numero) {
+    return numero % 2 === 0;
+  }
+  
+
+  numero = parseInt(prompt("Introduce un número:"));
+  
+  
+  resultado = [];
+  
+  if (esPrimo(numero)) {
+    resultado.push("primo");
+  }
+  
+  if (esFibonacci(numero)) {
+    resultado.push("fibonacci");
+  }else {
+    console.log(`${numero} no es Fibonacci`);
+  }
+  
+  if (esPar(numero)) {
+    resultado.push("par");
+  } else {
+    resultado.push("impar");
+  }
+  
+  console.log(`${numero} es ${resultado.join(", ")}`);
+  
+
+
+
+// *** Ejercicio 26
+
+let jugador1, jugador2
+
+function calcularGanador(jugadas) {
+    const reglas = {
+        "piedra": ["tijeras", "lagarto"],
+        "papel" : ["piedra", "mano"],
+        "tijeras": ["papel", "lagarto"],
+        "lagarto": ["papel", "mano"],
+        "mano" : ["piedra", " tijeras"]     
+          }
+  
+    jugador1 = 0;
+    jugador2 = 0;
+  
+    for (const [jugada1, jugada2] of jugadas) {
+      if (jugada1 === jugada2) {
+        continue;
+      }
+  
+      if (reglas[jugada1].includes(jugada2)) {
+        jugador1++;
+        console.log (jugador1)
+      } else {
+        jugador2++;
+        console.log(jugador2)
+      }
+    }
+  
+    if (jugador1 > jugador2) {
+      return "Player 1";
+    } else if (jugador2 > jugador1) {
+      return "Player 2";
+    } else {
+      return "Tie";
+    }
+  }
+  
+  const jugadas = [
+    ["piedra", "tijeras"],
+    ["tijeras", "piedra"],
+    ["papel", "tijeras"]
+  ];
+  
+  const ganador = calcularGanador(jugadas);
+  console.log(`El ganador es: ${ganador}`);
+ 
+
+
+// *** Ejercicio 27
+
+
+
+  const casas = {
+    Gryffindor: 0,
+    Slytherin: 0,
+    Hufflepuff: 0,
+    Ravenclaw: 0
+  };
+  
+  function hacerPregunta(pregunta, opciones) {
+    const respuesta = prompt(`${pregunta}\n${opciones}`).toLowerCase();
+    return respuesta;
+  }
+  
+  const respuesta1 = hacerPregunta("¿Qué cualidad valoras más?", "(a) Valentía\n(b) Ambición\n(c) Lealtad\n(d) Inteligencia");
+  const respuesta2 = hacerPregunta(" Si te enfrentaras a un obstáculo difícil, ¿cuál sería tu enfoque para superarlo?:", "(a) Lucharía valientemente hasta superarlo.\n(b)  Analizaría la situación y buscaría la mejor estrategia.\n(c) Buscaría ayuda y apoyo de mis amigos.\n(d)Usaría cualquier medio necesario para superarlo y destacar.");
+  const respuesta3 = hacerPregunta("¿Qué actividad disfrutas más?", "(a) Duelos\n(b) Planear estrategias\n(c) Cuidar de otros\n(d) Resolver acertijos");
+  const respuesta4 = hacerPregunta("¿Cuál es tu materia favorita?", "(a) Defensa contra las Artes Oscuras\n(b) Pociones\n(c) Herbología\n(d) Adivinación");
+  const respuesta5 = hacerPregunta("Elige un color:", "(a) Rojo\n(b) Verde\n(c) Amarillo\n(d) Azul");
+  
+
+
+  
+  switch (respuesta1) {
+    case 'a':
+      casas.Gryffindor++
+      break
+    case 'b':
+      casas.Slytherin++
+      break
+    case 'c':
+      casas.Hufflepuff++
+      break
+    case 'd':
+      casas.Ravenclaw++
+      break
+  }
+  
+  switch (respuesta2) {
+    case 'a':
+      casas.Gryffindor++
+      break
+    case 'b':
+      casas.Ravenclaw++
+      
+    case 'c':
+      casas.Hufflepuff++
+      break
+    case 'd':
+      casas.Slytherin++
+      break
+  }
+  
+  switch (respuesta3) {
+    case 'a':
+      casas.Slytherin++
+      break
+    case 'b':
+      casas.Gryffindor++
+      break
+    case 'c':
+      casas.Hufflepuff++
+      break
+    case 'd':
+      casas.Ravenclaw++
+      break
+  }
+  
+  switch (respuesta4) {
+    case 'a':
+      casas.Gryffindor++
+      break
+    case 'b':
+      casas.Slytherin++
+      break
+    case 'c':
+      casas.Hufflepuff++
+      break
+    case 'd':
+      casas.Ravenclaw++
+      break
+  }
+  
+  switch (respuesta5) {
+    case 'a':
+      casas.Gryffindor++
+      break
+    case 'b':
+      casas.Slytherin++
+      break
+    case 'c':
+      casas.Hufflepuff++
+      break
+    case 'd':
+      casas.Ravenclaw++
+      break
+  }
+  
+  // Determinar la casa ganadora
+  let casaGanadora = '';
+  let maxPuntos = 0;
+  
+  for (const casa in casas) {
+    if (casas[casa] > maxPuntos) {
+      casaGanadora = casa;
+      maxPuntos = casas[casa];
+    }
+  }
+  
+  console.log(` El Sombrero Seleccionador ha decidido que perteneces a la casa ${casaGanadora}.`);
+  */
+
+
+
+  // *** Ejercicio 28
